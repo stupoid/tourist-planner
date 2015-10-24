@@ -1,0 +1,9 @@
+{
+  "name": "tourist-planner",
+  "version": "1.0.0",
+  "main": "server.js",
+  "description": "CZ2006 Software Engineering Project",
+  "dependencies": {
+    "express": "^4.13.3"
+  }
+}
