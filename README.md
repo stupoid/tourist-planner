@@ -4,6 +4,13 @@ CZ2006 Software Engineering Project
 Installation steps:
 
 1. Install Node.js: https://nodejs.org/en/
-2. Go to the root of the file directory 'tourist-planner'
+2. Go to the root of the file directory `tourist-planner`
 3. Start the node server: type `node server.js`
 4. View the website at [http://localhost:8080](http://localhost:8080)
+
+Changes
+- Redid the entire client side using [OneMap JavaScript APIs](http://www.onemap.sg/API/Help/) and ditched Angular for jQuery due to compatibility concerns
+- No longer using REST calls from local node server, leverage on pre-built javascript functions instead (noticable speed increase)
+
+Known Bugs
+- GetDirection function for routing known to respond multiple times, causing a problem with synchronising the right route when comparing the time taken
