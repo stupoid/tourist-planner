@@ -6,15 +6,17 @@
 	<!-- set the base path for angular routing -->
 	<base href="/">
 
-	<!-- CSS -->
-	<!-- load bootstrap and fontawesome via CDN -->
 	<link rel="stylesheet" href="assets/libs/bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="assets/css/style.css">
 
 	<script src="assets/libs/jquery/dist/jquery.min.js"></script>
 	<script src="assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src='https://www.onemap.sg/API/JS/?accessKEY=xkg8VRu6Ol+gMH+SUamkRIEB7fKzhwMvfMo/2U8UJcFhdvR4yN1GutmUIA3A6r3LDhot215OVVkZvNRzjl28TNUZgYFSswOi&v=3.10&type=full'></script>
-	<script src="app.js"></script>
+	<script src="app/homePageUI.js"></script>
+	<script src="app/locationsController.js"></script>
+	<script src="app/route.js"></script>
+	<script src="app/routeController.js"></script>
+	<script src="app/app.js"></script>
 </head>
 <body>
   <nav class="navbar navbar-default navbar-fixed-top">
@@ -30,12 +32,12 @@
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li><a onclick="getTheme('hotels')">Hotels</a></li>
-        <li><a onclick="getTheme('museum')">Museum</a></li>
-        <li><a onclick="getTheme('libraries')">Libraries</a></li>
-        <li><a onclick="getTheme('monuments')">Monuments</a></li>
-				<li><a onclick="getTheme('tourism')">Tourism</a></li>
-				<li><a onclick="getTheme('hawkercentre')">Hawker Centres</a></li>
+        <li><a onclick="selectTheme('hotels')">Hotels</a></li>
+        <li><a onclick="selectTheme('museum')">Museum</a></li>
+        <li><a onclick="selectTheme('libraries')">Libraries</a></li>
+        <li><a onclick="selectTheme('monuments')">Monuments</a></li>
+				<li><a onclick="selectTheme('tourism')">Tourism</a></li>
+				<li><a onclick="selectTheme('hawkercentre')">Hawker Centres</a></li>
       </ul>
     </div>
   </div>
@@ -45,25 +47,20 @@
 	<div class="row">
 		<div class="col-md-2" data-spy="affix">
 			<h3 id="plannerHeader">Route Planner</h3>
-			<div id="routeStart"></div>
-			<div id="routeMid"></div>
-			<div id="routeEnd"></div>
+			<div id="routePlanner"></div>
 			<button type="button" id="btn-plan" class="btn btn-primary btn-block" onclick="generateRoutes()">Plan Route</button>
 		</div>
 
 		<div class="col-md-9 col-md-offset-3">
 			<div class="page-header">
-				<h3 id="resultHeader">Select a Category</h3>
+				<h3 id="header">Select a Category</h3>
 			</div>
-			<div id="results">
+			<div id="locations-body">
 			</div>
 			<div class="row">
 				<div class="col-md-8">
-					<div id="map" data-spy="affix"></div>
-				</div>
-				<div id="directions" class="col-md-4">
-					<h4>Directions</h4>
-				</div>
+					<div id="map" data-spy="affix"></div></div>
+				<div id="directions" class="col-md-4"></div>
 			</div>
 
 		</div>
