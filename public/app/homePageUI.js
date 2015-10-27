@@ -6,10 +6,16 @@ function HomePageUI() {
   this.mediaHTML = "";
 
   this.SetThemeHeader = SetThemeHeader;
+  this.ShowAlert = ShowAlert;
   this.DisplayLocations = DisplayLocations;
   this.Loading = Loading;
   this.StopLoading = StopLoading;
   this.Reset = Reset;
+};
+
+function ShowAlert(message) {
+  $('#alert-box').fadeIn('fast').delay(10000).fadeOut('slow');
+  $("#alert-message").html(message);
 };
 
 function Loading() {
@@ -35,14 +41,14 @@ function SetThemeHeader(themeName) {
 };
 
 function DisplayLocations(locations, themeName) {
+  var that = this;
   var mediaHTML = "";
   locations.forEach(function(location, index) {
     mediaHTML += generateMediaHTML(location, index);
   });
 
-  $("#locations-body").html(mediaHTML);
-  var theme = themeName.charAt(0).toUpperCase() + themeName.substr(1).toLowerCase();
-  $("#header").html(theme);
+  $(that.body).html(mediaHTML);
+  that.SetThemeHeader(themeName);
 };
 
 function generateMediaHTML(location, index) {
@@ -63,9 +69,10 @@ function generateMediaHTML(location, index) {
   return '<div class="media">'+mediaLeft+mediaBody+'</div>';
 }
 
-function DisplayMap() {
-};
-
 function Reset() {
-  $(this.body).html("");
+  $(this.body).html("").show();
+  this.state = "ready";
+  $("#results-body").hide();
+  $("#alert-box").hide();
+  $("#plannerHeader").html("Route Planner");
 };

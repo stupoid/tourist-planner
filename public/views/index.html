@@ -12,9 +12,11 @@
 	<script src="assets/libs/jquery/dist/jquery.min.js"></script>
 	<script src="assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src='https://www.onemap.sg/API/JS/?accessKEY=xkg8VRu6Ol+gMH+SUamkRIEB7fKzhwMvfMo/2U8UJcFhdvR4yN1GutmUIA3A6r3LDhot215OVVkZvNRzjl28TNUZgYFSswOi&v=3.10&type=full'></script>
-	<script src="app/homePageUI.js"></script>
-	<script src="app/locationsController.js"></script>
 	<script src="app/route.js"></script>
+	<script src="app/homePageUI.js"></script>
+	<script src="app/resultsUI.js"></script>
+	<script src="app/mapController.js"></script>
+	<script src="app/locationsController.js"></script>
 	<script src="app/routeController.js"></script>
 	<script src="app/app.js"></script>
 </head>
@@ -48,16 +50,21 @@
 		<div class="col-md-2" data-spy="affix">
 			<h3 id="plannerHeader">Route Planner</h3>
 			<div id="routePlanner"></div>
-			<button type="button" id="btn-plan" class="btn btn-primary btn-block" onclick="generateRoutes()">Plan Route</button>
+			<button type="button" id="btn-plan" class="btn btn-primary btn-block" onclick="planRoute()">Plan Route</button>
 		</div>
 
 		<div class="col-md-9 col-md-offset-3">
+			<div id="alert-box" class="alert alert-warning alert-dismissible" role="alert">
+			  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			  <strong id="alert-message">Warning!</strong>
+			</div>
+
 			<div class="page-header">
 				<h3 id="header">Select a Category</h3>
 			</div>
 			<div id="locations-body">
 			</div>
-			<div class="row">
+			<div id="results-body" class="row">
 				<div class="col-md-8">
 					<div id="map" data-spy="affix"></div></div>
 				<div id="directions" class="col-md-4"></div>

@@ -6,7 +6,9 @@ function LocationsController() {
   this.GetTheme = GetTheme;
 };
 
-function GetTheme(themeName, callback) {
+function GetTheme(themeName) {
+  homePageUI.Loading();
+  homePageUI.Reset();
   var that = this;
   var theme = themeName.charAt(0).toUpperCase() + themeName.substr(1).toLowerCase();
   that.theme = theme;
@@ -21,6 +23,6 @@ function GetTheme(themeName, callback) {
     that.locationCount = locations[0].FeatCount;
     locations.shift();
     that.locations = locations;
-    callback(locations, themeName);
+    homePageUI.DisplayLocations(locations, themeName)
   });
 };

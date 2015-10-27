@@ -1,20 +1,15 @@
 $(function() {
-
-  /*
-  var testRoute = new Route();
-  testRoute.GetRoute();
-  console.log(testRoute);
-  */
-
   locationsController = new LocationsController();
   routeController = new RouteController();
+  mapController = new MapController();
   homePageUI = new HomePageUI();
-
+  resultsUI = new ResultsUI();
+  homePageUI.Reset();
 });
 
 function selectTheme(themeName) {
-  homePageUI.Loading();
-  locationsController.GetTheme(themeName, homePageUI.DisplayLocations);
+  locationsController.GetTheme(themeName);
+  $("#btn-plan").attr("disabled", false);
 };
 
 function selectLocation(type, index) {
@@ -25,3 +20,15 @@ function selectLocation(type, index) {
 function removeSelected(type, index) {
   routeController.RemoveLocation(type, index);
 };
+
+function planRoute() {
+  routeController.GenerateRoutes();
+};
+
+function zoomTo(x,y) {
+  if (homePageUI.state == "result") {
+    console.log("zoom")
+  } else {
+    console.log("no zoom")
+  }
+}
