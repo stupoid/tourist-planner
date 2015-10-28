@@ -96,12 +96,12 @@ function generatePanelHTML(location, index, type) {
 
   var panelHeader = '<div class="panel-heading"><h3 class="panel-title">'+panelTitle+'<span class="glyphicon glyphicon-remove pull-right" onClick="removeSelected(\''+type+'\', '+index+')"></span></h3></div>';
   var panelBody = '<div class="panel-body panel-planner" onClick="zoomTo('+location.XY+')">'+location.NAME+'</div>';
-  
+
   return panelHTML = '<div class="panel '+panelClass+'">'+panelHeader+panelBody+'</div>';
 };
 
 function GenerateRoutes() {
-  homePageUI.Loading();
+  mainUI.Loading();
   var that = this;
   var len = that.locations.length;
   var routes = that.routes;

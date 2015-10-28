@@ -1,15 +1,39 @@
 $(function() {
+  SHA256 = new Hashes.SHA256();
   locationsController = new LocationsController();
   routeController = new RouteController();
   mapController = new MapController();
-  homePageUI = new HomePageUI();
+  userController = new UserController();
+  authController = new AuthController();
+  mainUI = new MainUI();
   resultsUI = new ResultsUI();
-  homePageUI.Reset();
+  mainUI.Reset();
 });
 
 function selectTheme(themeName) {
   locationsController.GetTheme(themeName);
   $("#btn-plan").attr("disabled", false);
+};
+
+function showSignIn() {
+  authController.ShowModal();
+};
+
+function authModalSubmit() {
+  if (authController.state == "sign_in") {
+    var email = $("#inputEmail").val();
+    var password = $("#inputPassword").val();
+    authController.SignIn(email, password);
+  } else if (authController.state == "sign_up") {
+    var email = $("#inputEmail").val();
+    var name = $("#inputName").val();
+    var password = $("#inputPassword").val();
+    authController.SignUp(email, name, password);
+  }
+};
+
+function switchForm() {
+  authController.SwitchModalState();
 };
 
 function selectLocation(type, index) {
@@ -26,8 +50,8 @@ function planRoute() {
 };
 
 function zoomTo(x,y) {
-  if (homePageUI.state == "result") {
-    console.log("zoom")
+  if (mainUI.state == "result") {
+    mapController.showLocation(x,y);
   } else {
     console.log("no zoom")
   }

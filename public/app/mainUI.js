@@ -1,4 +1,4 @@
-function HomePageUI() {
+function MainUI() {
   this.state = "ready";
   this.header = "#header";
   this.body = "#locations-body";

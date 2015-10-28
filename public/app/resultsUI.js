@@ -5,7 +5,7 @@ function ResultsUI() {
 };
 
 function DisplayResults() {
-  homePageUI.state = "result";
+  mainUI.state = "result";
   $("#locations-body").hide();
   mapController.GetOneMap("map", "SM", { level: 2 });
   $("#results-body").show();

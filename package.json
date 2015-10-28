@@ -4,6 +4,8 @@
   "main": "server.js",
   "description": "CZ2006 Software Engineering Project",
   "dependencies": {
-    "express": "^4.13.3"
+    "body-parser": "^1.14.1",
+    "express": "^4.13.3",
+    "jsonfile": "^2.2.3"
   }
 }

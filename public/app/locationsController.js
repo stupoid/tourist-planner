@@ -4,11 +4,12 @@ function LocationsController() {
   this.theme = "";
 
   this.GetTheme = GetTheme;
+  this.GetRecommended = GetRecommended;
 };
 
 function GetTheme(themeName) {
-  homePageUI.Loading();
-  homePageUI.Reset();
+  mainUI.Loading();
+  mainUI.Reset();
   var that = this;
   var theme = themeName.charAt(0).toUpperCase() + themeName.substr(1).toLowerCase();
   that.theme = theme;
@@ -23,6 +24,10 @@ function GetTheme(themeName) {
     that.locationCount = locations[0].FeatCount;
     locations.shift();
     that.locations = locations;
-    homePageUI.DisplayLocations(locations, themeName)
+    mainUI.DisplayLocations(locations, themeName)
   });
+};
+
+function GetRecommended() {
+
 };
