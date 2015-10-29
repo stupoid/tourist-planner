@@ -3,6 +3,11 @@ function UserController() {
   this.UserLogin = UserLogin;
 };
 
-function UserLogin(name, password) {
-  console.log("logging in as " + name);
+function UserLogin(name, email) {
+  this.user = {
+    name: name,
+    email: email
+  }
+  $("#btn-login").html(name);
+  
 };

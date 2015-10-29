@@ -5,6 +5,7 @@ $(function() {
   mapController = new MapController();
   userController = new UserController();
   authController = new AuthController();
+  userController = new UserController();
   mainUI = new MainUI();
   resultsUI = new ResultsUI();
   mainUI.Reset();
@@ -16,7 +17,13 @@ function selectTheme(themeName) {
 };
 
 function showSignIn() {
-  authController.ShowModal();
+  if (authController.state != "signed_in") {
+    authController.ShowModal();
+  } else {
+    console.log("pop");
+    $("#btn-login").popover();
+  }
+
 };
 
 function authModalSubmit() {

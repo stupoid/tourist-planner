@@ -16,14 +16,17 @@ function ShowModal() {
 };
 
 function SignIn(email, password) {
+  var that = this;
   var user = {
     email: email,
     password: SHA256.hex(password)
   };
 
   $.post("api/users/auth", user, function(data) {
-    if (data.success) console.log("Call userController logged in state");
-    else console.log("login failed");
+    if (data.success) {
+      that.state = "signed_in";
+      userController.UserLogin(data.name, email);
+    } else console.log("login failed");
   });
 };
 
