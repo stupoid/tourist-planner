@@ -52,11 +52,23 @@ function DisplayLocations(locations, themeName) {
 };
 
 function generateMediaHTML(location, index) {
-  if (!location.PHOTOURL)
+  if (!location.PHOTOURL) {
     location.PHOTOURL = 'http://www.onemap.sg/API/Services.svc/getMap?token=qo/s2TnSUmfLz+32CvLC4RMVkzEFYjxqyti1KhByvEacEdMWBpCuSSQ+IFRT84QjGPBCuz/cBom8PfSm3GjEsGc8PkdEEOEr&bmap=SM&size=140,140&center='+location.XY+'&level=4&points='+location.XY;
+  }
+
+  var likeCount;
+
+  if (!!location.likes) {
+    likeCount = location.likes;
+  } else {
+    likeCount = 0;
+  }
 
   var mediaLeft = '<div class="media-left"><a href="'+location.HYPERLINK+'" target="_blank"><img class="media-object location-img" src="'+location.PHOTOURL+'" alt="'+location.NAME+'"></a></div>';
-  var buttons = '<div><div class="btn-group btn-group"><button class="btn btn-success" onClick="selectLocation(\'start\', '+index+')">Start</button><button class="btn btn-primary" onClick="selectLocation(\'add\', '+index+')">Add</button><button class="btn btn-warning" onClick="selectLocation(\'end\', '+index+')">End</button></div></div>';
+  var like = '<div class="btn-group pull-right" role="group"><button type="button" class="btn btn-default" onclick="reviewLocation(\''+location.NAME+'\')">Reviews</button><button type="button" class="btn btn-default" onclick="likeLocation(\''+location.NAME+'\')"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> <span class="badge">'+likeCount+'</span></button></div>';
+  //var like = '<button type="button" class="btn btn-default pull-right" onclick="likeLocation(\''+location.NAME+'\')"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> <span class="badge">4</span></button>';
+  //var review = '<button type="button" class="btn btn-default pull-right" onclick="reviewLocation(\''+location.NAME+'\')">Reviews</button>';
+  var buttons = '<div><div class="btn-group btn-group"><button class="btn btn-success" onClick="selectLocation(\'start\', '+index+')">Start</button><button class="btn btn-primary" onClick="selectLocation(\'add\', '+index+')">Add</button><button class="btn btn-warning" onClick="selectLocation(\'end\', '+index+')">End</button></div>'+like+'</div>';
   var address = '<p>'+location.ADDRESSSTREETNAME + ' Singapore ' + location.ADDRESSPOSTALCODE+'</p>';
 
   if (location.DESCRIPTION) {
@@ -75,4 +87,5 @@ function Reset() {
   $("#results-body").hide();
   $("#alert-box").hide();
   $("#plannerHeader").html("Route Planner");
+  $("#btn-plan").prop('disabled', true);
 };

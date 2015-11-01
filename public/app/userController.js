@@ -1,13 +1,21 @@
 function UserController() {
   this.user = "";
-  this.UserLogin = UserLogin;
+  this.UserSignIn = UserSignIn;
+  this.UserSignOut = UserSignOut;
 };
 
-function UserLogin(name, email) {
+function UserSignIn(name, email) {
   this.user = {
     name: name,
     email: email
   }
-  $("#btn-login").html(name);
-  
+  $("#btn-login").hide();
+  $("#btn-user").html(name).show();
+};
+
+function UserSignOut() {
+  this.user = "";
+  $("#btn-login").show();
+  $("#btn-user").hide();
+  authController.state = "sign_in";
 };

@@ -3,16 +3,27 @@ function AuthController() {
   this.modal = "#authModal";
 
   this.ShowModal = ShowModal;
+  this.HideModal = HideModal;
   this.SignIn = SignIn;
   this.SignUp = SignUp;
   this.SwitchModalState = SwitchModalState;
 
   $("#authModalName").hide();
   $("#alert-modal").hide();
+  $("#btn-user").hide();
 };
+
+function modalAlert(message) {
+  $("#alert-modal").show();
+  $("#alert-modal-message").html(message);
+}
 
 function ShowModal() {
   $(this.modal).modal('show');
+};
+
+function HideModal() {
+  $(this.modal).modal('hide');
 };
 
 function SignIn(email, password) {
@@ -25,12 +36,15 @@ function SignIn(email, password) {
   $.post("api/users/auth", user, function(data) {
     if (data.success) {
       that.state = "signed_in";
-      userController.UserLogin(data.name, email);
-    } else console.log("login failed");
+      that.HideModal();
+      ShowAlert("Sign in successful, signed in as " + data.name);
+      userController.UserSignIn(data.name, email);
+    } else modalAlert("Sign In failed");
   });
 };
 
 function SignUp(email, name, password) {
+  var that = this;
   var user = {
     email: email,
     name: name,
@@ -38,7 +52,12 @@ function SignUp(email, name, password) {
   };
 
   $.post("api/users/create", user, function(data) {
-    console.log(data);
+    if (data.success) {
+      that.state = "signed_in";
+      that.HideModal();
+      ShowAlert("Sign up successful, signed in as " + name);
+      userController.UserSignIn(name, email);
+    } else modalAlert("Sign Up failed");
   });
 };
 

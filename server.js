@@ -26,6 +26,47 @@ app.get('/api/locations/:theme', function(req, res) {
 	res.json(requestedLocation);
 });
 
+app.put('/api/locations/:theme/:name', function(req, res) {
+	var theme = req.params.theme;
+	var name = req.params.name;
+	var requestedTheme;
+	var requestedLocation;
+
+	locations.forEach(function(theme, index) {
+		if (theme == location.theme) requestedTheme = theme;
+	});
+
+	theme.shift();
+
+	theme.forEach(function(location, index) {
+			if (location.NAME == name) requestedLocation = location;
+	});
+
+	res.json(location);
+});
+
+app.post('/api/locations/like', function(req, res) {
+	var themeName = req.body.theme;
+	var locationName = req.body.location;
+	var email = req.body.email;
+
+	locations.forEach(function(theme, index) {
+		if (themeName == theme.theme) {
+			theme.SrchResults.forEach(function(location, index) {
+				if (location.NAME == locationName) {
+					if (!!location.likes) {
+						location.likes++;
+					} else {
+						location.likes = 1;
+					}
+				}
+			});
+		}
+	});
+
+	jsonfile.writeFileSync('./data/locations.json', locations);
+	res.json({ success: true });
+});
 
 app.post('/api/users/auth', function(req, res) {
 	var match = false;

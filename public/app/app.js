@@ -9,7 +9,24 @@ $(function() {
   mainUI = new MainUI();
   resultsUI = new ResultsUI();
   mainUI.Reset();
+
+  // disable form standard action
+  $("#modal-form").submit(function(e){
+    return false;
+  });
 });
+
+function likeLocation(locationName) {
+  if (authController.state == "signed_in") {
+    locationsController.LikeLocation(userController.user.email, locationName);
+  } else {
+    mainUI.ShowAlert("Please Sign in first");
+  }
+};
+
+function reviewLocation(locationName) {
+  console.log(locationName);
+};
 
 function selectTheme(themeName) {
   locationsController.GetTheme(themeName);
@@ -17,13 +34,11 @@ function selectTheme(themeName) {
 };
 
 function showSignIn() {
-  if (authController.state != "signed_in") {
-    authController.ShowModal();
-  } else {
-    console.log("pop");
-    $("#btn-login").popover();
-  }
+  authController.ShowModal();
+};
 
+function signOut() {
+  userController.UserSignOut();
 };
 
 function authModalSubmit() {
@@ -51,6 +66,10 @@ function selectLocation(type, index) {
 function removeSelected(type, index) {
   routeController.RemoveLocation(type, index);
 };
+
+$("#btn-plan").click(function() {
+  console.log("button clicked still");
+});
 
 function planRoute() {
   routeController.GenerateRoutes();
