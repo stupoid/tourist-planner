@@ -4,8 +4,9 @@ function LocationsController() {
   this.theme = "";
 
   this.GetTheme = GetTheme;
-  this.GetRecommended = GetRecommended;
+  //this.GetRecommended = GetRecommended;
   this.LikeLocation = LikeLocation;
+  this.Search = Search;
 };
 
 function GetTheme(themeName) {
@@ -20,13 +21,18 @@ function GetTheme(themeName) {
     that.locationCount = locations[0].FeatCount;
     locations.shift();
     that.locations = locations;
+
     mainUI.DisplayLocations(locations, themeName)
   });
 };
 
-function GetRecommended() {
-
-};
+function Search(search_term) {
+  var theme = this.theme;
+  var locations = this.locations;
+  var search = new RegExp(search_term , "i");
+  var results = $.grep(locations, function(e){ return search.test(e.NAME); });
+  mainUI.DisplayLocations(results, theme);
+}
 
 function LikeLocation(email, locationName) {
   var that = this;

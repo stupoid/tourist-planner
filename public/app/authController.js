@@ -2,8 +2,8 @@ function AuthController() {
   this.state = "sign_in";
   this.modal = "#authModal";
 
-  this.ShowModal = ShowModal;
-  this.HideModal = HideModal;
+  this.ShowAuthModal = ShowAuthModal;
+  this.HideAuthModal = HideAuthModal;
   this.SignIn = SignIn;
   this.SignUp = SignUp;
   this.SwitchModalState = SwitchModalState;
@@ -16,13 +16,17 @@ function AuthController() {
 function modalAlert(message) {
   $("#alert-modal").show();
   $("#alert-modal-message").html(message);
-}
+};
 
-function ShowModal() {
+function HideModalAlert() {
+  $("#alert-modal").hide();
+};
+
+function ShowAuthModal() {
   $(this.modal).modal('show');
 };
 
-function HideModal() {
+function HideAuthModal() {
   $(this.modal).modal('hide');
 };
 
@@ -36,10 +40,12 @@ function SignIn(email, password) {
   $.post("api/users/auth", user, function(data) {
     if (data.success) {
       that.state = "signed_in";
-      that.HideModal();
+      that.HideAuthModal();
       ShowAlert("Sign in successful, signed in as " + data.name);
       userController.UserSignIn(data.name, email);
-    } else modalAlert("Sign In failed");
+    } else {
+      modalAlert("Sign In failed");
+    }
   });
 };
 
@@ -54,7 +60,7 @@ function SignUp(email, name, password) {
   $.post("api/users/create", user, function(data) {
     if (data.success) {
       that.state = "signed_in";
-      that.HideModal();
+      that.HideAuthModal();
       ShowAlert("Sign up successful, signed in as " + name);
       userController.UserSignIn(name, email);
     } else modalAlert("Sign Up failed");

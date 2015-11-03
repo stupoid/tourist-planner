@@ -7,6 +7,7 @@ function MainUI() {
 
   this.SetThemeHeader = SetThemeHeader;
   this.ShowAlert = ShowAlert;
+  this.HideAlert = HideAlert;
   this.DisplayLocations = DisplayLocations;
   this.Loading = Loading;
   this.StopLoading = StopLoading;
@@ -14,8 +15,12 @@ function MainUI() {
 };
 
 function ShowAlert(message) {
-  $('#alert-box').fadeIn('fast').delay(10000).fadeOut('slow');
+  $('#alert-box').show();
   $("#alert-message").html(message);
+};
+
+function HideAlert() {
+  $('#alert-box').hide();
 };
 
 function Loading() {
@@ -49,6 +54,7 @@ function DisplayLocations(locations, themeName) {
 
   $(that.body).html(mediaHTML);
   that.SetThemeHeader(themeName);
+  $("#searchVal").show();
 };
 
 function generateMediaHTML(location, index) {
@@ -87,5 +93,5 @@ function Reset() {
   $("#results-body").hide();
   $("#alert-box").hide();
   $("#plannerHeader").html("Route Planner");
-  $("#btn-plan").prop('disabled', true);
+  $("#searchVal").hide();
 };

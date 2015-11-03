@@ -17,6 +17,7 @@
 	<script src="app/route.js"></script>
 	<script src="app/location.js"></script>
 	<script src="app/user.js"></script>
+	<script src="app/review.js"></script>
 	<script src="app/mainUI.js"></script>
 	<script src="app/resultsUI.js"></script>
 	<script src="app/authController.js"></script>
@@ -24,6 +25,7 @@
 	<script src="app/locationsController.js"></script>
 	<script src="app/routeController.js"></script>
 	<script src="app/userController.js"></script>
+	<script src="app/reviewController.js"></script>
 	<script src="app/app.js"></script>
 </head>
 <body>
@@ -74,13 +76,20 @@
 
 		<div class="col-md-9 col-md-offset-3">
 			<div id="alert-box" class="alert alert-warning alert-dismissible" role="alert">
-			  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			  <button type="button" class="close" aria-label="Close" onclick="hideAlert()"><span aria-hidden="true">&times;</span></button>
 			  <strong id="alert-message">Warning!</strong>
 			</div>
 
-			<div class="page-header">
-				<h3 id="header">Select a Category</h3>
+			<div class="row">
+					<div class="col-md-8">
+						<h3 id="header">Select a Category</h3>
+					</div>
+					<div class="col-md-4">
+						<input type="text" id="searchVal" class="form-control" placeholder="Search within results">
+					</div>
 			</div>
+			<hr>
+
 			<div id="locations-body">
 			</div>
 			<div id="results-body" class="row">
@@ -105,7 +114,7 @@
 				<div class="row">
 					<div class="col-md-6 col-md-offset-3">
 						<div id="alert-modal" class="alert alert-warning alert-dismissible" role="alert">
-							<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<button type="button" class="close" aria-label="Close" onclick="HideModalAlert()"><span aria-hidden="true">&times;</span></button>
 							<strong id="alert-modal-message">Warning!</strong>
 						</div>
 						<form id="modal-form" onsubmit="authModalSubmit()">
@@ -132,6 +141,36 @@
         <button type="submit" id="authModalButton" class="btn btn-primary">Sign In</button>
       </div>
 			</form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="reviewModalLabel">Location Name</h4>
+      </div>
+      <div class="modal-body">
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2">
+						<form id="modal-form" onsubmit="submitReview()">
+							<div class="form-group">
+								<label for="inputReview">Write a review</label>
+								<textarea id="inputReview" class="form-control" rows="3" placeholder="What do you think of this place?"></textarea>
+								<button type="submit" id="reviewModalButton" class="btn btn-block btn-primary">Submit Review</button>
+							</div>
+						</form>
+						<div id="reviews"></div>
+					</div>
+				</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+      </div>
+
     </div>
   </div>
 </div>

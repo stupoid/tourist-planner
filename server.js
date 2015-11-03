@@ -10,6 +10,7 @@ app.use(bodyParser.json());
 
 var users = jsonfile.readFileSync('./data/users.json');
 var locations = jsonfile.readFileSync('./data/locations.json');
+var reviews = jsonfile.readFileSync('./data/reviews.json');
 
 app.use(express.static(__dirname + '/public'));
 
@@ -26,23 +27,25 @@ app.get('/api/locations/:theme', function(req, res) {
 	res.json(requestedLocation);
 });
 
-app.put('/api/locations/:theme/:name', function(req, res) {
-	var theme = req.params.theme;
-	var name = req.params.name;
-	var requestedTheme;
-	var requestedLocation;
+app.post('/api/locations/reviews/get', function(req, res) {
+	var location = req.body.location
+	var theme = req.body.theme;
+	var locationReviews = [];
 
-	locations.forEach(function(theme, index) {
-		if (theme == location.theme) requestedTheme = theme;
-	});
+	reviews.forEach(function(review, index) {
+		if (review.location == location && review.theme == theme) {
+			locationReviews.push(review);
+		}
+	})
 
-	theme.shift();
+	res.json(locationReviews);
+});
 
-	theme.forEach(function(location, index) {
-			if (location.NAME == name) requestedLocation = location;
-	});
-
-	res.json(location);
+app.post('/api/locations/reviews', function(req, res) {
+	var review = req.body;
+	reviews.push(review);
+	jsonfile.writeFileSync('./data/reviews.json', reviews);
+	res.json({success:true});
 });
 
 app.post('/api/locations/like', function(req, res) {

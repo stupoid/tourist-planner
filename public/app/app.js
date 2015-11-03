@@ -6,13 +6,19 @@ $(function() {
   userController = new UserController();
   authController = new AuthController();
   userController = new UserController();
+  reviewController = new ReviewController();
   mainUI = new MainUI();
   resultsUI = new ResultsUI();
   mainUI.Reset();
 
   // disable form standard action
-  $("#modal-form").submit(function(e){
+  $("form").submit(function(e){
     return false;
+  });
+
+  $("#searchVal").keyup(function() {
+    var searchVal = $("#searchVal").val();
+    locationsController.Search(searchVal);
   });
 });
 
@@ -25,8 +31,18 @@ function likeLocation(locationName) {
 };
 
 function reviewLocation(locationName) {
-  console.log(locationName);
+  reviewController.ShowReviewModal(locationName);
 };
+
+function submitReview() {
+  if (authController.state == "signed_in") {
+    var review = $("#inputReview").val();
+    reviewController.PostReview(review);
+  } else {
+    mainUI.ShowAlert("Please Sign in first");
+    reviewController.HideReviewModal();
+  }
+}
 
 function selectTheme(themeName) {
   locationsController.GetTheme(themeName);
@@ -34,7 +50,7 @@ function selectTheme(themeName) {
 };
 
 function showSignIn() {
-  authController.ShowModal();
+  authController.ShowAuthModal();
 };
 
 function signOut() {
@@ -67,12 +83,21 @@ function removeSelected(type, index) {
   routeController.RemoveLocation(type, index);
 };
 
-$("#btn-plan").click(function() {
-  console.log("button clicked still");
-});
-
 function planRoute() {
-  routeController.GenerateRoutes();
+  mainUI.HideAlert();
+  if (!routeController.routeStart) {
+    mainUI.ShowAlert("Please select a start location");
+  } else if (!routeController.routeEnd) {
+    mainUI.ShowAlert("Please select a end location");
+  } else if (routeController.routeMid.length < 2) {
+    mainUI.ShowAlert("Please add more locations in the middle");
+  } else {
+    routeController.GeGenerateRoutes();
+  }
+};
+
+function hideAlert() {
+  mainUI.HideAlert();
 };
 
 function zoomTo(x,y) {

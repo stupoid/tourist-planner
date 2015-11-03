@@ -19,6 +19,14 @@ a {
   height: 500px;
 }
 
+#searchVal {
+  margin-top: 20px;
+}
+
+blockquote {
+  font-size: 1.0em;
+}
+
 .glyphicon-remove.pull-right {
   cursor: pointer;
 }
