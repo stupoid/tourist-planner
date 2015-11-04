@@ -17,6 +17,7 @@ function MainUI() {
 function ShowAlert(message) {
   $('#alert-box').show();
   $("#alert-message").html(message);
+  $("html, body").animate({ scrollTop: 0 }, "slow");
 };
 
 function HideAlert() {
@@ -32,9 +33,9 @@ function Loading() {
   $("#btn-plan").attr("disabled", true);
 };
 
-function StopLoading(newHeaderTitle) {
+function StopLoading() {
   this.loading = "ready";
-  $(this.header).html(newHeaderTitle);
+  $(this.header).html(this.theme);
   $(".glyphicon-remove").show();
   $("#btn-plan").attr("disabled", false);
 };
@@ -55,6 +56,7 @@ function DisplayLocations(locations, themeName) {
   $(that.body).html(mediaHTML);
   that.SetThemeHeader(themeName);
   $("#searchVal").show();
+  $(".glyphicon-remove").show();
 };
 
 function generateMediaHTML(location, index) {

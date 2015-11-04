@@ -142,11 +142,18 @@ function getRoutes() {
 function findShortest() {
   var that = this;
   var shortestRoute = that.routes[0];
-  that.routes.forEach(function(route, index) {
-    var shortestTime = shortestRoute.routeResults.directions[0].summary.totalTime;
-    var currentTime = route.routeResults.directions[0].summary.totalTime;
-    if (shortestTime > currentTime) shortestRoute = route;
-  });
+  if (!!shortestRoute.routeResults.directions) {
+    that.routes.forEach(function(route, index) {
+      var shortestTime = shortestRoute.routeResults.directions[0].summary.totalTime;
+      var currentTime = route.routeResults.directions[0].summary.totalTime;
+      if (shortestTime > currentTime) shortestRoute = route;
+    });
+  } else {
+    mainUI.ShowAlert("Could not find routes matching that location, please select other locations");
+    mainUI.StopLoading();
+    return;
+  }
+
 
   that.shortestRoute = shortestRoute;
   var locations = shortestRoute.locations;

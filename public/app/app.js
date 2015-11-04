@@ -80,8 +80,12 @@ function switchForm() {
 };
 
 function selectLocation(type, index) {
-  var location = locationsController.locations[index];
-  routeController.AddLocation(type, location);
+  if (type == "add" && routeController.routeMid.length>2) {
+    mainUI.ShowAlert("Maximum amount of locations selected");
+  } else {
+    var location = locationsController.locations[index];
+    routeController.AddLocation(type, location);
+  }
 };
 
 function removeSelected(type, index) {
@@ -89,6 +93,7 @@ function removeSelected(type, index) {
 };
 
 function planRoute() {
+  console.log(routeController);
   mainUI.HideAlert();
   if (!routeController.routeStart) {
     mainUI.ShowAlert("Please select a start location");
@@ -97,7 +102,7 @@ function planRoute() {
   } else if (routeController.routeMid.length < 2) {
     mainUI.ShowAlert("Please add more locations in the middle");
   } else {
-    routeController.GeGenerateRoutes();
+    routeController.GenerateRoutes();
   }
 };
 

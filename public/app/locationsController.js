@@ -29,6 +29,7 @@ function GetTheme(themeName) {
 function GetRecommended() {
   var that = this;
   that.theme = "Recommended";
+  mainUI.theme = "Recommended";
   var url = "/api/recommended/";
   $.get(url, function (data) {
     var locations = data[0].SrchResults;
@@ -61,7 +62,7 @@ function LikeLocation(email, locationName) {
   } else {
     var url = '/api/locations/like';
   }
-  
+
   $.post(url, data, function(res) {
     if (res.success) {
       if (that.theme == "Recommended") GetRecommended();
