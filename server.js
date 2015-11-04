@@ -11,6 +11,7 @@ app.use(bodyParser.json());
 var users = jsonfile.readFileSync('./data/users.json');
 var locations = jsonfile.readFileSync('./data/locations.json');
 var reviews = jsonfile.readFileSync('./data/reviews.json');
+var recommended = jsonfile.readFileSync('./data/recommended.json');
 
 app.use(express.static(__dirname + '/public'));
 
@@ -25,6 +26,10 @@ app.get('/api/locations/:theme', function(req, res) {
 		if (theme == location.theme) requestedLocation = location
 	})
 	res.json(requestedLocation);
+});
+
+app.get('/api/recommended', function(req, res) {
+	res.json(recommended);
 });
 
 app.post('/api/locations/reviews/get', function(req, res) {
@@ -46,6 +51,23 @@ app.post('/api/locations/reviews', function(req, res) {
 	reviews.push(review);
 	jsonfile.writeFileSync('./data/reviews.json', reviews);
 	res.json({success:true});
+});
+
+app.post('/api/recommended/like', function(req, res) {
+	var locationName = req.body.location;
+	var email = req.body.email;
+
+	recommended[0].SrchResults.forEach(function(location, index) {
+		if (location.NAME == locationName) {
+			if (!!location.likes) {
+				location.likes++;
+			} else {
+				location.likes = 1;
+			}
+		}
+	});
+	jsonfile.writeFileSync('./data/recommended.json', recommended);
+	res.json({ success: true });
 });
 
 app.post('/api/locations/like', function(req, res) {

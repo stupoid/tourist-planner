@@ -11,8 +11,10 @@ a {
 }
 
 .location-img {
-  width: 140px;
-  height: 140px;
+  max-width: 140px;
+  max-height: 140px;
+  width: auto;
+  height: auto;
 }
 
 #map {
@@ -25,6 +27,10 @@ a {
 
 blockquote {
   font-size: 1.0em;
+}
+
+textarea {
+  resize: none;
 }
 
 .glyphicon-remove.pull-right {

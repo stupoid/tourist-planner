@@ -9,6 +9,8 @@ function UserSignIn(name, email) {
     name: name,
     email: email
   }
+  $("#inputEmail").val('');
+  $("#inputPassword").val('');
   $("#btn-login").hide();
   $("#btn-user").html(name).show();
 };

@@ -41,7 +41,7 @@ function SignIn(email, password) {
     if (data.success) {
       that.state = "signed_in";
       that.HideAuthModal();
-      ShowAlert("Sign in successful, signed in as " + data.name);
+      ShowAlert("Signed in as " + data.name + " successfully.");
       userController.UserSignIn(data.name, email);
     } else {
       modalAlert("Sign In failed");
@@ -61,7 +61,8 @@ function SignUp(email, name, password) {
     if (data.success) {
       that.state = "signed_in";
       that.HideAuthModal();
-      ShowAlert("Sign up successful, signed in as " + name);
+      ShowAlert("Signed in as " + name + " successfully.");
+
       userController.UserSignIn(name, email);
     } else modalAlert("Sign Up failed");
   });

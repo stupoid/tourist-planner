@@ -94,4 +94,5 @@ function Reset() {
   $("#alert-box").hide();
   $("#plannerHeader").html("Route Planner");
   $("#searchVal").hide();
+  $("#searchVal").val('');
 };

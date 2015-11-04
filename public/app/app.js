@@ -11,6 +11,7 @@ $(function() {
   resultsUI = new ResultsUI();
   mainUI.Reset();
 
+  locationsController.GetRecommended();
   // disable form standard action
   $("form").submit(function(e){
     return false;
@@ -48,6 +49,10 @@ function selectTheme(themeName) {
   locationsController.GetTheme(themeName);
   $("#btn-plan").attr("disabled", false);
 };
+
+function selectRecommended() {
+  locationsController.GetRecommended();
+}
 
 function showSignIn() {
   authController.ShowAuthModal();

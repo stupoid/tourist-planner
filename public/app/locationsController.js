@@ -4,7 +4,7 @@ function LocationsController() {
   this.theme = "";
 
   this.GetTheme = GetTheme;
-  //this.GetRecommended = GetRecommended;
+  this.GetRecommended = GetRecommended;
   this.LikeLocation = LikeLocation;
   this.Search = Search;
 };
@@ -17,12 +17,26 @@ function GetTheme(themeName) {
 
   var url = "/api/locations/" + themeName;
   $.get(url, function (data) {
-    var locations = data.SrchResults
+    var locations = data.SrchResults;
     that.locationCount = locations[0].FeatCount;
     locations.shift();
     that.locations = locations;
 
     mainUI.DisplayLocations(locations, themeName)
+  });
+};
+
+function GetRecommended() {
+  var that = this;
+  that.theme = "Recommended";
+  var url = "/api/recommended/";
+  $.get(url, function (data) {
+    var locations = data[0].SrchResults;
+    var locationCount = locations[0].FeatCount;
+    locations.shift();
+    that.locations = locations;
+
+    mainUI.DisplayLocations(locations, "Recommended");
   });
 };
 
@@ -41,9 +55,17 @@ function LikeLocation(email, locationName) {
     location: locationName,
     theme: this.theme
   }
-  console.log(data);
-  var url = '/api/locations/like';
+
+  if (that.theme == "Recommended") {
+    url = '/api/recommended/like';
+  } else {
+    var url = '/api/locations/like';
+  }
+  
   $.post(url, data, function(res) {
-    if (res.success) GetTheme(that.theme);
+    if (res.success) {
+      if (that.theme == "Recommended") GetRecommended();
+      else GetTheme(that.theme);
+    }
   });
 }

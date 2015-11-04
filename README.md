@@ -10,7 +10,4 @@ Installation steps:
 
 Changes
 - Redid the entire client side using [OneMap JavaScript APIs](http://www.onemap.sg/API/Help/) and ditched Angular for jQuery due to compatibility concerns
-- No longer using REST calls from local node server, leverage on pre-built javascript functions instead (noticable speed increase)
-
-Known Bugs
-- GetDirection function for routing known to respond multiple times, causing a problem with synchronising the right route when comparing the time taken
+- Using server side json files as store for locations
