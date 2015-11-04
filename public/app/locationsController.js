@@ -1,6 +1,7 @@
 function LocationsController() {
   this.locationCount = 0;
   this.locations = [];
+  this.searchLocations = [];
   this.theme = "";
 
   this.GetTheme = GetTheme;
@@ -45,8 +46,8 @@ function Search(search_term) {
   var theme = this.theme;
   var locations = this.locations;
   var search = new RegExp(search_term , "i");
-  var results = $.grep(locations, function(e){ return search.test(e.NAME); });
-  mainUI.DisplayLocations(results, theme);
+  this.searchLocations = $.grep(locations, function(e){ return search.test(e.NAME); });
+  mainUI.DisplayLocations(this.searchLocations, theme);
 }
 
 function LikeLocation(email, locationName) {

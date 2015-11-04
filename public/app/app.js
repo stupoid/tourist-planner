@@ -83,7 +83,8 @@ function selectLocation(type, index) {
   if (type == "add" && routeController.routeMid.length>2) {
     mainUI.ShowAlert("Maximum amount of locations selected");
   } else {
-    var location = locationsController.locations[index];
+    if ($("#searchVal").val().length>0) var location = locationsController.searchLocations[index];
+    else var location = locationsController.locations[index];
     routeController.AddLocation(type, location);
   }
 };
