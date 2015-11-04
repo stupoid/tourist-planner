@@ -7,6 +7,7 @@ function ResultsUI() {
 function DisplayResults() {
   mainUI.state = "result";
   $("#locations-body").hide();
+  $("#searchVal").hide();
   mapController.GetOneMap("map", "SM", { level: 2 });
   $("#results-body").show();
   $("#header").html("Results");
