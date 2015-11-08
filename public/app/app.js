@@ -64,14 +64,22 @@ function signOut() {
 
 function authModalSubmit() {
   if (authController.state == "sign_in") {
-    var email = $("#inputEmail").val();
-    var password = $("#inputPassword").val();
-    authController.SignIn(email, password);
+    if (!!$("#inputEmail").val() && !!$("#inputPassword").val()) {
+      var email = $("#inputEmail").val();
+      var password = $("#inputPassword").val();
+      authController.SignIn(email, password);
+    } else {
+      authController.modalAlert("Please fill up the email and password");
+    }
   } else if (authController.state == "sign_up") {
-    var email = $("#inputEmail").val();
-    var name = $("#inputName").val();
-    var password = $("#inputPassword").val();
-    authController.SignUp(email, name, password);
+    if (!!$("#inputEmail").val() && !!$("#inputName").val() && !!$("#inputPassword").val()) {
+      var email = $("#inputEmail").val();
+      var name = $("#inputName").val();
+      var password = $("#inputPassword").val();
+      authController.SignUp(email, name, password);
+    } else {
+      authController.modalAlert("Please fill up the email, name and password");
+    }
   }
 };
 

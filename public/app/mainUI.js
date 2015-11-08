@@ -12,6 +12,11 @@ function MainUI() {
   this.Loading = Loading;
   this.StopLoading = StopLoading;
   this.Reset = Reset;
+  this.DisplayRoutePlanner = DisplayRoutePlanner;
+};
+
+function DisplayRoutePlanner(panelHTML) {
+  $("#routePlanner").html(panelHTML);
 };
 
 function ShowAlert(message) {

@@ -10,7 +10,7 @@ function RouteController() {
 
   this.AddLocation = AddLocation;
   this.RemoveLocation = RemoveLocation;
-  this.DisplayRoutePlanner = DisplayRoutePlanner;
+  this.GenerateRoutePlanner = GenerateRoutePlanner;
   this.generateLocationsArray = generateLocationsArray;
   this.GenerateRoutes = GenerateRoutes;
   this.getRoutes = getRoutes;
@@ -35,7 +35,7 @@ function AddLocation(type, location) {
   };
 
   this.locations = this.generateLocationsArray();
-  this.DisplayRoutePlanner(this.routeStart, this.routeMid, this.routeEnd);
+  this.GenerateRoutePlanner(this.routeStart, this.routeMid, this.routeEnd);
 };
 
 function RemoveLocation(type, index) {
@@ -53,7 +53,7 @@ function RemoveLocation(type, index) {
       this.routeMid.splice(index, 1);
   }
   this.locations = this.generateLocationsArray();
-  this.DisplayRoutePlanner(this.routeStart, this.routeMid, this.routeEnd);
+  this.GenerateRoutePlanner(this.routeStart, this.routeMid, this.routeEnd);
 }
 
 function generateLocationsArray() {
@@ -62,7 +62,7 @@ function generateLocationsArray() {
   return locations;
 }
 
-function DisplayRoutePlanner(routeStart, routeMid, routeEnd, clickToZoom) {
+function GenerateRoutePlanner(routeStart, routeMid, routeEnd) {
   var that = this;
   var panelHTML = "";
 
@@ -74,7 +74,8 @@ function DisplayRoutePlanner(routeStart, routeMid, routeEnd, clickToZoom) {
 
   if (routeEnd) panelHTML += generatePanelHTML(routeEnd, 0, 'end');
 
-  $("#routePlanner").html(panelHTML);
+  mainUI.DisplayRoutePlanner(panelHTML);
+
 };
 
 function generatePanelHTML(location, index, type) {
@@ -158,7 +159,7 @@ function findShortest() {
   that.shortestRoute = shortestRoute;
   var locations = shortestRoute.locations;
   var len = locations.length;
-  that.DisplayRoutePlanner(that.routeStart, locations.slice(1, len-1), that.routeEnd);
+  that.GenerateRoutePlanner(that.routeStart, locations.slice(1, len-1), that.routeEnd);
 
   resultsUI.DisplayResults();
 };

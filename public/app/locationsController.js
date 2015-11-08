@@ -28,6 +28,8 @@ function GetTheme(themeName) {
 };
 
 function GetRecommended() {
+  mainUI.Loading();
+  mainUI.Reset();
   var that = this;
   that.theme = "Recommended";
   mainUI.theme = "Recommended";

@@ -7,6 +7,7 @@ function AuthController() {
   this.SignIn = SignIn;
   this.SignUp = SignUp;
   this.SwitchModalState = SwitchModalState;
+  this.modalAlert = modalAlert;
 
   $("#authModalName").hide();
   $("#alert-modal").hide();
