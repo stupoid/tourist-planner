@@ -14,6 +14,7 @@ function DisplayResults() {
   $("#plannerHeader").html("Shortest Route");
   this.showDirections();
   mapController.DrawRoute(routeController.shortestRoute.routeResults.routes);
+  $("html, body").animate({ scrollTop: 0 }, "slow");
 };
 
 function showDirections() {

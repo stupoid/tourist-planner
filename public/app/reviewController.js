@@ -15,6 +15,7 @@ function ShowReviewModal(location) {
 function HideReviewModal() {
   $(this.modal).modal('hide');
   $("#reviewModal").modal('hide');
+  $("#inputReview").val("");
 };
 
 function GetReviews(location) {

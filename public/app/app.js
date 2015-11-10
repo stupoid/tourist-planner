@@ -81,6 +81,9 @@ function authModalSubmit() {
       authController.modalAlert("Please fill up the email, name and password");
     }
   }
+  $("#inputEmail").val('');
+  $("#inputName").val('');
+  $("#inputPassword").val('');
 };
 
 function switchForm() {
@@ -113,6 +116,7 @@ function planRoute() {
   } else {
     routeController.GenerateRoutes();
   }
+  $("html, body").animate({ scrollTop: 0 }, "slow");
 };
 
 function hideAlert() {

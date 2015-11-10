@@ -21,6 +21,9 @@ function modalAlert(message) {
 
 function HideModalAlert() {
   $("#alert-modal").hide();
+  $("#inputEmail").val('');
+  $("#inputName").val('');
+  $("#inputPassword").val('');
 };
 
 function ShowAuthModal() {
